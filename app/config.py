@@ -14,12 +14,16 @@ class Settings(BaseSettings):
     """
     
     # TODO: Configuración básica de la aplicación
+
     app_name: str = "API de Películas"
     app_version: str = "1.0.0"
     
+
     # TODO: Configuración del entorno
     # environment: Literal["development", "testing", "production"] = "development"
     environment: str = "development"
+    testing = str = "testing"
+    production = str = "production"
     
     # TODO: Configuración de la base de datos
     # Para SQLite: sqlite:///./peliculas.db
