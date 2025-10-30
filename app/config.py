@@ -24,11 +24,12 @@ class Settings(BaseSettings):
     environment: str = "development"
     testing = str = "testing"
     production = str = "production"
-    
+
     # TODO: Configuración de la base de datos
     # Para SQLite: sqlite:///./peliculas.db
     # Para PostgreSQL: postgresql://user:password@localhost/dbname
     database_url: str = "sqlite:///./peliculas.db"
+    postgres= str = "postgresql://user:password@localhost/dbname"
     
     # TODO: Configuración del servidor
     host: str = "0.0.0.0"
