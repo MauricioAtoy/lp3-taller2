@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     port: int = 8000
     debug: bool = True
     
-    # TODO: Configuración de CORS
+    # TODO: Configuración de CORS :)
     # En desarrollo puedes usar ["*"], en producción especifica los orígenes permitidos
     cors_origins: list[str] = ["*"]
     CORS(
@@ -48,10 +48,18 @@ class Settings(BaseSettings):
     allow_headers=["*"]         # Encabezados permitidos
 )
     # TODO: Configuración de seguridad (para futuras mejoras)
-    # secret_key: str = "your-secret-key-here"  # Cambiar en producción
-    # algorithm: str = "HS256"
-    # access_token_expire_minutes: int = 30
-    
+    secret_key: str = "your-secret-key-here"  # Cambiar en producción
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+
+    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+    def crear_token(data: dict, expires_delta: Optional[timedelta] = None):
+        to_encode = data.copy()
+        expire = datetime.utcnow() + (timedelta(minutes=access_token_expire_minutes))
+        to_encode.update({"exp": expire})
+        encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
+        return encoded_jwt
+
     # TODO: Configuración de logging
     # log_level: str = "INFO"
     
