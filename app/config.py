@@ -113,7 +113,9 @@ class DevelopmentSettings(Settings):
     """Configuración para el entorno de desarrollo."""
     debug: bool = True
     # TODO: Agregar configuraciones específicas de desarrollo
-
+    cors_origins: List[str] = ["*"]  # Permitir todos los orígenes
+    log_level: str = "DEBUG"         # Más detalle en los logs
+    database_url: str = "sqlite:///dev.db"
 
 class TestingSettings(Settings):
     """Configuración para el entorno de pruebas."""
