@@ -61,8 +61,11 @@ class Settings(BaseSettings):
         return encoded_jwt
 
     # TODO: Configuración de logging
-    # log_level: str = "INFO"
-    
+    log_level: str = "INFO"
+    logging.basicConfig(
+    level=getattr(logging, log_level),  # convierte "INFO" en logging.INFO
+    format="%(asctime)s - %(levelname)s - %(message)s"
+    )
     class Config:
         """
         Configuración de Pydantic Settings.
