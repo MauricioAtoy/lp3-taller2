@@ -121,8 +121,21 @@ class TestingSettings(Settings):
     """Configuración para el entorno de pruebas."""
     # TODO: Usar una base de datos diferente para pruebas
     database_url: str = "sqlite:///./test_peliculas.db"
-    # TODO: Agregar configuraciones específicas de pruebas
-
+    # TODO: Agregar configuraciones específicas de pruebas :)
+    # Debug activado para ver mensajes detallados en tests
+    debug: bool = True
+    
+    # CORS abierto solo para pruebas
+    cors_origins: list[str] = ["*"]
+    
+    # Logging más detallado en pruebas
+    log_level: str = "DEBUG"
+    
+    # JWT con expiración corta para tests automáticos
+    access_token_expire_minutes: int = 5
+    
+    # Otras configuraciones específicas de pruebas
+    testing: bool = True  # indicador para usar en la app
 
 class ProductionSettings(Settings):
     """Configuración para el entorno de producción."""
