@@ -60,12 +60,13 @@ class Settings(BaseSettings):
         encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
         return encoded_jwt
 
-    # TODO: Configuración de logging
+    # TODO: Configuración de logging :)
     log_level: str = "INFO"
     logging.basicConfig(
     level=getattr(logging, log_level),  # convierte "INFO" en logging.INFO
     format="%(asctime)s - %(levelname)s - %(message)s"
     )
+
     class Config:
         """
         Configuración de Pydantic Settings.
@@ -84,7 +85,21 @@ class Settings(BaseSettings):
 
 # TODO: Crear una instancia global de Settings
 settings = Settings()
+class Settings(BaseSettings):
+    host: str = "0.0.0.0"
+    port: int = 8000
+    debug: bool = True
 
+    # CORS
+    cors_origins: List[str] = ["*"]
+
+    # Seguridad (JWT)
+    secret_key: str = "super-secret-key"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+
+    # Logging
+    log_level: str = "INFO"
 
 # TODO: Opcional - Crear diferentes configuraciones para cada entorno
 class DevelopmentSettings(Settings):
