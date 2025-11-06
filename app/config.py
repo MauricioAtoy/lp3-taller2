@@ -59,7 +59,14 @@ class Settings(BaseSettings):
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
         return encoded_jwt
+@app.post("/token")
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    if form_data.username != "admin" or form_data.password != "123":
+        raise HTTPException(status_code=400, detail="Credenciales incorrectas")
 
+    access_token = crear_token({"sub": form_data.username})
+    return {"access_token": access_token, "token_type": "bearer"}
+    
     # TODO: Configuración de logging :)
     log_level: str = "INFO"
     logging.basicConfig(
