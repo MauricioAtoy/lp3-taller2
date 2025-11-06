@@ -19,19 +19,20 @@ class Settings(BaseSettings):
     app_version: str = "1.0.0"
     
 
-    # TODO: Configuración del entorno
+    # TODO: Configuración del entorno :)
     # environment: Literal["development", "testing", "production"] = "development"
     environment: str = "development"
     testing = str = "testing"
     production = str = "production"
 
-    # TODO: Configuración de la base de datos
+    # TODO: Configuración de la base de datos :)
     # Para SQLite: sqlite:///./peliculas.db
     # Para PostgreSQL: postgresql://user:password@localhost/dbname
     database_url: str = "sqlite:///./peliculas.db"
     postgres= str = "postgresql://user:password@localhost/dbname"
     
-    # TODO: Configuración del servidor
+    # TODO: Configuración del servidor :)
+    if __name__ == "__main__":
     host: str = "0.0.0.0"
     port: int = 8000
     debug: bool = True
