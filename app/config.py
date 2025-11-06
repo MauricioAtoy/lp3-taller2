@@ -40,7 +40,13 @@ class Settings(BaseSettings):
     # TODO: Configuración de CORS
     # En desarrollo puedes usar ["*"], en producción especifica los orígenes permitidos
     cors_origins: list[str] = ["*"]
-    
+    CORS(
+    app,
+    origins=cors_origins,       # Dominios permitidos
+    supports_credentials=True,  # Permitir cookies o headers de autenticación
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos HTTP permitidos
+    allow_headers=["*"]         # Encabezados permitidos
+)
     # TODO: Configuración de seguridad (para futuras mejoras)
     # secret_key: str = "your-secret-key-here"  # Cambiar en producción
     # algorithm: str = "HS256"
