@@ -24,14 +24,14 @@ class UsuarioCreate(BaseModel):
     correo: EmailStr = Field(description="Correo electrónico único")
     
     # TODO: Opcional - Agregar ejemplo para la documentación
-    # model_config = ConfigDict(
-    #     json_schema_extra={
-    #         "example": {
-    #             "nombre": "Juan Pérez",
-    #             "correo": "juan.perez@email.com"
-    #         }
-    #     }
-    # )
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "nombre": "Juan Pérez",
+                "correo": "juan.perez@email.com"
+            }
+        }
+    )
     pass
 
 
