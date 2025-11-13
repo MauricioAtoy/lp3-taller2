@@ -84,7 +84,10 @@ def obtener_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Buscar el usuario por ID
-    usuario = 
+    usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
+    
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
     
     return usuario
 
