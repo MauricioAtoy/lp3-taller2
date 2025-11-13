@@ -147,8 +147,8 @@ class FavoritoCreate(BaseModel):
     """
     Schema para marcar una película como favorita.
     """
-    # id_usuario: int = Field(gt=0)
-    # id_pelicula: int = Field(gt=0)
+    id_usuario: int = Field(gt=0)
+    id_pelicula: int = Field(gt=0)
     pass
 
 
