@@ -26,7 +26,7 @@ def create_db_and_tables():
     Se llama al iniciar la aplicación.
     """
     # TODO: Importar todos los modelos antes de crear las tablas
-    # from app.models import Usuario, Pelicula, Favorito
+    from app.models import Usuario, Pelicula, Favorito
     
     SQLModel.metadata.create_all(engine)
     print("Tablas de la base de datos creadas correctamente")
