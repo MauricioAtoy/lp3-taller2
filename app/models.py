@@ -78,13 +78,13 @@ class Favorito(SQLModel, table=True):
 
 # TODO: Opcional - Agregar métodos útiles a los modelos
 # Ejemplo para Usuario:
-# def __repr__(self):
-#     return f"<Usuario(id={self.id}, nombre={self.nombre}, correo={self.correo})>"
+def __repr__(self):
+    return f"<Usuario(id={self.id}, nombre={self.nombre}, correo={self.correo})>"
 #
-# @property
-# def cantidad_favoritos(self) -> int:
+@property
+def cantidad_favoritos(self) -> int:
 #     """Retorna la cantidad de películas favoritas del usuario."""
-#     return len(self.favoritos) if self.favoritos else 0
+    return len(self.favoritos) if self.favoritos else 0
 
 
 # TODO: Opcional - Agregar validadores personalizados
