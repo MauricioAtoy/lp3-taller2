@@ -157,12 +157,12 @@ class FavoritoRead(BaseModel):
     """
     Schema para retornar información de un favorito.
     """
-    # id: int
-    # id_usuario: int
-    # id_pelicula: int
-    # fecha_marcado: datetime
+    id: int
+    id_usuario: int
+    id_pelicula: int
+    fecha_marcado: datetime
     
-    # model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
     pass
 
 
