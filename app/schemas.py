@@ -109,13 +109,13 @@ class PeliculaUpdate(BaseModel):
     Schema para actualizar una película existente.
     Todos los campos son opcionales.
     """
-    # titulo: Optional[str] = Field(None, min_length=1, max_length=200)
-    # director: Optional[str] = Field(None, min_length=1, max_length=150)
-    # genero: Optional[str] = None
-    # duracion: Optional[int] = Field(None, gt=0)
-    # año: Optional[int] = Field(None, ge=1888, le=2100)
-    # clasificacion: Optional[str] = None
-    # sinopsis: Optional[str] = None
+    titulo: Optional[str] = Field(None, min_length=1, max_length=200)
+    director: Optional[str] = Field(None, min_length=1, max_length=150)
+    genero: Optional[str] = None
+    duracion: Optional[int] = Field(None, gt=0)
+    año: Optional[int] = Field(None, ge=1888, le=2100)
+    clasificacion: Optional[str] = None
+    sinopsis: Optional[str] = None
     pass
 
 
