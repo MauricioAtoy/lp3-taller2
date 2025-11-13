@@ -41,8 +41,8 @@ class UsuarioUpdate(BaseModel):
     Schema para actualizar un usuario existente.
     Todos los campos son opcionales.
     """
-    # nombre: Optional[str] = Field(None, min_length=1, max_length=100)
-    # correo: Optional[EmailStr] = None
+    nombre: Optional[str] = Field(None, min_length=1, max_length=100)
+    correo: Optional[EmailStr] = None
     pass
 
 
