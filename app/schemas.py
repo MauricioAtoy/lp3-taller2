@@ -195,11 +195,11 @@ class PaginatedResponse(BaseModel):
     """
     Schema genérico para respuestas paginadas.
     """
-    # items: List[BaseModel]
-    # total: int
-    # page: int = 1
-    # size: int = 50
-    # pages: int
+    items: List[BaseModel]
+    total: int
+    page: int = 1
+    size: int = 50
+    pages: int
     pass
 
 
