@@ -122,7 +122,7 @@ def actualizar_usuario(
             raise HTTPException(status_code=400, detail="Correo ya registrado por otro usuario")
 
     # TODO: Actualizar solo los campos proporcionados
-    usuario_data = 
+    usuario_data =  usuario_update.dict(exclude_unset=True)
     
     return db_usuario
 
