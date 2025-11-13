@@ -107,10 +107,20 @@ def actualizar_usuario(
     - **correo**: Nuevo correo (opcional)
     """
     # TODO: Buscar el usuario
-    db_usuario = 
+    db_usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
+    if not db_usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
     
     # TODO: Si se actualiza el correo, verificar que no exista
-    
+        if usuario_update.correo:
+        correo_existente = session.query(Usuario).filter(
+            Usuario.correo == usuario_update.correo,
+            Usuario.id != usuario_id
+        ).first()
+        if correo_existente:
+            raise HTTPException(status_code=400, detail="Correo ya registrado por otro usuario")
+
     # TODO: Actualizar solo los campos proporcionados
     usuario_data = 
     
