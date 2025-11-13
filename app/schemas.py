@@ -52,12 +52,12 @@ class UsuarioRead(BaseModel):
     Schema para retornar información de un usuario.
     Incluye todos los campos del modelo.
     """
-    # id: int
-    # nombre: str
-    # correo: str
-    # fecha_registro: datetime
+    id: int
+    nombre: str
+    correo: str
+    fecha_registro: datetime
     
-    # model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
     pass
 
 
