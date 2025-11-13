@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     # Para SQLite: sqlite:///./peliculas.db
     # Para PostgreSQL: postgresql://user:password@localhost/dbname
     database_url: str = "sqlite:///./peliculas.db"
-    postgres= str = "postgresql://usuario:usuario@localhost/init_db.sql"
+    postgres= str = "postgresql://usuario:usuario@localhost/peliculas.db"
     
     # TODO: Configuración del servidor :)
     if __name__ == "__main__":
@@ -144,7 +144,7 @@ class ProductionSettings(Settings):
     cors_origins: list[str] = ["https://miappfrontend.com"]
     log_level: str = "INFO"
     # TODO: Cambiar a una base de datos más robusta (PostgreSQL, MySQL)
-        database_url: str = "postgresql://usuario:contraseña@localhost/peliculas_prod"
+        database_url: str = "postgresql://usuario:usuario@localhost/peliculas_prod"
     # database_url: str = "postgresql://user:password@localhost/peliculas_prod"
 
 
