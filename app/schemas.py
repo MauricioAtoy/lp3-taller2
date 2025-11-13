@@ -171,8 +171,8 @@ class FavoritoWithDetails(FavoritoRead):
     """
     Schema para retornar un favorito con información del usuario y película.
     """
-    # usuario: UsuarioRead
-    # pelicula: PeliculaRead
+    usuario: UsuarioRead
+    pelicula: PeliculaRead
     pass
 
 
