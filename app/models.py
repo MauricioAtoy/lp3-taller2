@@ -16,13 +16,13 @@ class Usuario(SQLModel, table=True):
     Representa a los usuarios registrados en la plataforma.
     """
     # TODO: Definir los campos del modelo
-    # id: Optional[int] = Field(default=None, primary_key=True)
-    # nombre: str = Field(max_length=100, index=True)
-    # correo: str = Field(unique=True, max_length=150, index=True)
-    # fecha_registro: datetime = Field(default_factory=datetime.now)
+    id: Optional[int] = Field(default=None, primary_key=True)
+    nombre: str = Field(max_length=100, index=True)
+    correo: str = Field(unique=True, max_length=150, index=True)
+    fecha_registro: datetime = Field(default_factory=datetime.now)
     
     # TODO: Definir relaciones con otros modelos
-    # favoritos: List["Favorito"] = Relationship(back_populates="usuario")
+    favoritos: List["Favorito"] = Relationship(back_populates="usuario")
     
     pass
 
