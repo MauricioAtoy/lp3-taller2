@@ -63,8 +63,8 @@ class Favorito(SQLModel, table=True):
     fecha_marcado: datetime = Field(default_factory=datetime.now)
     
     # TODO: Definir relaciones con otros modelos
-    # usuario: Optional[Usuario] = Relationship(back_populates="favoritos")
-    # pelicula: Optional[Pelicula] = Relationship(back_populates="favoritos")
+    usuario: Optional[Usuario] = Relationship(back_populates="favoritos")
+    pelicula: Optional[Pelicula] = Relationship(back_populates="favoritos")
     
     # TODO: Opcional - Agregar restricción de unicidad
     # class Config:
