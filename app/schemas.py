@@ -185,8 +185,8 @@ class MessageResponse(BaseModel):
     """
     Schema genérico para respuestas con mensajes.
     """
-    # message: str
-    # detail: Optional[str] = None
+    message: str
+    detail: Optional[str] = None
     pass
 
 
