@@ -34,18 +34,18 @@ class Pelicula(SQLModel, table=True):
     Representa las películas disponibles en la plataforma.
     """
     # TODO: Definir los campos del modelo
-    # id: Optional[int] = Field(default=None, primary_key=True)
-    # titulo: str = Field(max_length=200, index=True)
-    # director: str = Field(max_length=150)
-    # genero: str = Field(max_length=100)
-    # duracion: int = Field(description="Duración en minutos")
-    # año: int = Field(ge=1888, le=2100)  # El cine comenzó en 1888
-    # clasificacion: str = Field(max_length=10)  # G, PG, PG-13, R, NC-17
-    # sinopsis: Optional[str] = Field(default=None, max_length=1000)
-    # fecha_creacion: datetime = Field(default_factory=datetime.now)
+    id: Optional[int] = Field(default=None, primary_key=True)
+    titulo: str = Field(max_length=200, index=True)
+    director: str = Field(max_length=150)
+    genero: str = Field(max_length=100)
+    duracion: int = Field(description="Duración en minutos")
+    año: int = Field(ge=1888, le=2100)  # El cine comenzó en 1888
+    clasificacion: str = Field(max_length=10)  # G, PG, PG-13, R, NC-17
+    sinopsis: Optional[str] = Field(default=None, max_length=1000)
+    fecha_creacion: datetime = Field(default_factory=datetime.now)
     
     # TODO: Definir relaciones con otros modelos
-    # favoritos: List["Favorito"] = Relationship(back_populates="pelicula")
+    favoritos: List["Favorito"] = Relationship(back_populates="pelicula")
     
     pass
 
