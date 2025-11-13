@@ -67,11 +67,11 @@ class Favorito(SQLModel, table=True):
     pelicula: Optional[Pelicula] = Relationship(back_populates="favoritos")
     
     # TODO: Opcional - Agregar restricción de unicidad
-    # class Config:
+    class Config:
     #     # Evita que un usuario marque la misma película como favorita más de una vez
-    #     table_args = (
-    #         UniqueConstraint('id_usuario', 'id_pelicula', name='unique_user_movie'),
-    #     )
+        table_args = (
+        UniqueConstraint('id_usuario', 'id_pelicula', name='unique_user_movie'),
+        )
     
     pass
 
