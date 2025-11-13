@@ -208,11 +208,11 @@ class PeliculaSearchParams(BaseModel):
     """
     Parámetros de búsqueda para películas.
     """
-    # titulo: Optional[str] = None
-    # director: Optional[str] = None
-    # genero: Optional[str] = None
-    # año: Optional[int] = None
-    # año_min: Optional[int] = None
-    # año_max: Optional[int] = None
+    titulo: Optional[str] = None
+    director: Optional[str] = None
+    genero: Optional[str] = None
+    año: Optional[int] = None
+    año_min: Optional[int] = None
+    año_max: Optional[int] = None
     pass
 
