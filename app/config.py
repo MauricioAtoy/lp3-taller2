@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     # Para SQLite: sqlite:///./peliculas.db
     # Para PostgreSQL: postgresql://user:password@localhost/dbname
     database_url: str = "sqlite:///./peliculas.db"
-    postgres= str = "postgresql://user:password@localhost/dbname"
+    postgres= str = "postgresql://usuario:usuario@localhost/init_db.sql"
     
     # TODO: Configuración del servidor :)
     if __name__ == "__main__":
@@ -138,10 +138,13 @@ class TestingSettings(Settings):
     testing: bool = True  # indicador para usar en la app
 
 class ProductionSettings(Settings):
-    """Configuración para el entorno de producción."""
+    """Configuración para el entorno de producción.""" #DUDAS AUN
     debug: bool = False
     # TODO: Agregar configuraciones específicas de producción
+    cors_origins: list[str] = ["https://miappfrontend.com"]
+    log_level: str = "INFO"
     # TODO: Cambiar a una base de datos más robusta (PostgreSQL, MySQL)
+        database_url: str = "postgresql://usuario:contraseña@localhost/peliculas_prod"
     # database_url: str = "postgresql://user:password@localhost/peliculas_prod"
 
 
