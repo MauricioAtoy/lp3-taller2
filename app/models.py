@@ -57,10 +57,10 @@ class Favorito(SQLModel, table=True):
     Representa la relación muchos-a-muchos entre usuarios y películas.
     """
     # TODO: Definir los campos del modelo
-    # id: Optional[int] = Field(default=None, primary_key=True)
-    # id_usuario: int = Field(foreign_key="usuario.id")
-    # id_pelicula: int = Field(foreign_key="pelicula.id")
-    # fecha_marcado: datetime = Field(default_factory=datetime.now)
+    id: Optional[int] = Field(default=None, primary_key=True)
+    id_usuario: int = Field(foreign_key="usuario.id")
+    id_pelicula: int = Field(foreign_key="pelicula.id")
+    fecha_marcado: datetime = Field(default_factory=datetime.now)
     
     # TODO: Definir relaciones con otros modelos
     # usuario: Optional[Usuario] = Relationship(back_populates="favoritos")
