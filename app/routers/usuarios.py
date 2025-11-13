@@ -38,7 +38,15 @@ def listar_usuarios(
     - **limit**: Número máximo de registros a retornar
     """
     # TODO: Consultar todos los usuarios con paginación
-
+    total = db.query(Usuario).count()
+    pages = (total + size - 1) // size
+    return PaginatedResponse(
+        items=usuarios,
+        total=total,
+        page=page,
+        size=size,
+        pages=pages
+    )
     return usuarios
 
 
