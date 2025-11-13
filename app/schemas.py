@@ -66,7 +66,7 @@ class UsuarioWithFavoritos(UsuarioRead):
     """
     Schema para retornar un usuario con sus películas favoritas.
     """
-    # favoritos: List["FavoritoRead"] = []
+    favoritos: List["FavoritoRead"] = []
     pass
 
 
