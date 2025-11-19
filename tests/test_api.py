@@ -423,12 +423,12 @@ class TestValidacion:
     # TODO: Test para validar email inválido
     def test_email_invalido(self, client: TestClient):
         """Test para verificar validación de email"""
-        # usuario_data = {
-        #     "nombre": "Usuario Test",
-        #     "correo": "email-invalido"
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 422  # Unprocessable Entity
+        usuario_data = {
+            "nombre": "Usuario Test",
+            "correo": "email-invalido"
+        }
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 422  # Unprocessable Entity
         pass
     
     # TODO: Test para validar año de película
