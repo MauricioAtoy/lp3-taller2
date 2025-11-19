@@ -298,16 +298,16 @@ class TestFavoritos:
         pelicula_test: Pelicula
     ):
         """Test para verificar que no se permiten favoritos duplicados"""
-        # favorito_data = {
-        #     "id_usuario": usuario_test.id,
-        #     "id_pelicula": pelicula_test.id
-        # }
-        # # Crear el primer favorito
-        # client.post("/api/favoritos/", json=favorito_data)
-        # 
-        # # Intentar crear el mismo favorito nuevamente
-        # response = client.post("/api/favoritos/", json=favorito_data)
-        # assert response.status_code == 400
+        favorito_data = {
+            "id_usuario": usuario_test.id,
+            "id_pelicula": pelicula_test.id
+        }
+        # Crear el primer favorito
+        client.post("/api/favoritos/", json=favorito_data)
+        
+        # Intentar crear el mismo favorito nuevamente
+        response = client.post("/api/favoritos/", json=favorito_data)
+        assert response.status_code == 400
         pass
     
     # TODO: Test para eliminar favorito
