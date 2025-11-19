@@ -224,11 +224,11 @@ class TestPeliculas:
     # TODO: Test para actualizar película
     def test_actualizar_pelicula(self, client: TestClient, pelicula_test: Pelicula):
         """Test para PUT /api/peliculas/{id}"""
-        # update_data = {"titulo": "Título Actualizado"}
-        # response = client.put(f"/api/peliculas/{pelicula_test.id}", json=update_data)
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["titulo"] == update_data["titulo"]
+        update_data = {"titulo": "Título Actualizado"}
+        response = client.put(f"/api/peliculas/{pelicula_test.id}", json=update_data)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["titulo"] == update_data["titulo"]
         pass
     
     # TODO: Test para eliminar película
