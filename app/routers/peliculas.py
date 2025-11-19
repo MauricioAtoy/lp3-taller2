@@ -181,30 +181,30 @@ def buscar_peliculas(
     - **año_max**: Busca películas hasta este año
     """
     # TODO: Construir la consulta base
-    # statement = select(Pelicula)
+    statement = select(Pelicula)
     
     # TODO: Agregar filtros según los parámetros proporcionados
-    # if titulo:
-    #     statement = statement.where(col(Pelicula.titulo).contains(titulo))
+    if titulo:
+        statement = statement.where(col(Pelicula.titulo).contains(titulo))
     
-    # if director:
-    #     statement = statement.where(col(Pelicula.director).contains(director))
+    if director:
+        statement = statement.where(col(Pelicula.director).contains(director))
     
-    # if genero:
-    #     statement = statement.where(col(Pelicula.genero).contains(genero))
+    if genero:
+        statement = statement.where(col(Pelicula.genero).contains(genero))
     
-    # if año:
-    #     statement = statement.where(Pelicula.año == año)
+    if año:
+        statement = statement.where(Pelicula.año == año)
     
-    # if año_min:
-    #     statement = statement.where(Pelicula.año >= año_min)
+    if año_min:
+        statement = statement.where(Pelicula.año >= año_min)
     
-    # if año_max:
-    #     statement = statement.where(Pelicula.año <= año_max)
+    if año_max:
+        statement = statement.where(Pelicula.año <= año_max)
     
     # TODO: Ejecutar la consulta y retornar resultados
-    # peliculas = session.exec(statement).all()
-    # return peliculas
+    peliculas = session.exec(statement).all()
+    return peliculas
     pass
 
 
