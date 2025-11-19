@@ -110,8 +110,10 @@ def obtener_favorito(
         )
     
     # TODO: Cargar relaciones (usuario y película)
+    _ = favorito.usuario
+    _ = favorito.pelicula
     # Esto depende de cómo hayas configurado las relaciones en los modelos
-    # return favorito
+    return favorito
     pass
 
 
