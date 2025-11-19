@@ -279,15 +279,15 @@ class TestFavoritos:
         pelicula_test: Pelicula
     ):
         """Test para POST /api/favoritos"""
-        # favorito_data = {
-        #     "id_usuario": usuario_test.id,
-        #     "id_pelicula": pelicula_test.id
-        # }
-        # response = client.post("/api/favoritos/", json=favorito_data)
-        # assert response.status_code == 201
-        # data = response.json()
-        # assert data["id_usuario"] == usuario_test.id
-        # assert data["id_pelicula"] == pelicula_test.id
+        favorito_data = {
+            "id_usuario": usuario_test.id,
+            "id_pelicula": pelicula_test.id
+        }
+        response = client.post("/api/favoritos/", json=favorito_data)
+        assert response.status_code == 201
+        data = response.json()
+        assert data["id_usuario"] == usuario_test.id
+        assert data["id_pelicula"] == pelicula_test.id
         pass
     
     # TODO: Test para crear favorito duplicado
