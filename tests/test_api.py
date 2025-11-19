@@ -241,11 +241,11 @@ class TestPeliculas:
     # TODO: Test para buscar películas
     def test_buscar_peliculas(self, client: TestClient, pelicula_test: Pelicula):
         """Test para GET /api/peliculas/buscar"""
-        # response = client.get(f"/api/peliculas/buscar/?titulo={pelicula_test.titulo}")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert len(data) > 0
-        # assert data[0]["titulo"] == pelicula_test.titulo
+        response = client.get(f"/api/peliculas/buscar/?titulo={pelicula_test.titulo}")
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data) > 0
+        assert data[0]["titulo"] == pelicula_test.titulo
         pass
     
     # TODO: Test para buscar películas con múltiples filtros
