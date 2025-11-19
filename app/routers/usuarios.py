@@ -63,8 +63,8 @@ def crear_usuario(
     - **correo**: Correo electrónico único
     """
     # TODO: Verificar que el correo no exista
-    statement = 
-    existing_user = 
+    statement = select(Usuario).where(Usuario.correo == usuario.correo)
+    existing_user = session.execute(statement).scalar_one_or_none()
     
     # TODO: Crear el nuevo usuario
     db_usuario = Usuario.model_validate(usuario)
