@@ -376,40 +376,40 @@ class TestIntegracion:
     # TODO: Test de flujo completo: crear usuario, película y marcar favorito
     def test_flujo_completo(self, client: TestClient):
         """Test que verifica el flujo completo de la aplicación"""
-        # # 1. Crear usuario
-        # usuario_data = {
-        #     "nombre": "Usuario Integración",
-        #     "correo": "integracion@example.com"
-        # }
-        # response_usuario = client.post("/api/usuarios/", json=usuario_data)
-        # assert response_usuario.status_code == 201
-        # usuario_id = response_usuario.json()["id"]
+        # 1. Crear usuario
+        usuario_data = {
+            "nombre": "Usuario Integración",
+            "correo": "integracion@example.com"
+        }
+        response_usuario = client.post("/api/usuarios/", json=usuario_data)
+        assert response_usuario.status_code == 201
+        usuario_id = response_usuario.json()["id"]
         # 
-        # # 2. Crear película
-        # pelicula_data = {
-        #     "titulo": "Película Integración",
-        #     "director": "Director Test",
-        #     "genero": "Drama",
-        #     "duracion": 120,
-        #     "año": 2023,
-        #     "clasificacion": "PG-13"
-        # }
-        # response_pelicula = client.post("/api/peliculas/", json=pelicula_data)
-        # assert response_pelicula.status_code == 201
-        # pelicula_id = response_pelicula.json()["id"]
+        # 2. Crear película
+        pelicula_data = {
+            "titulo": "Película Integración",
+            "director": "Director Test",
+            "genero": "Drama",
+            "duracion": 120,
+            "año": 2023,
+            "clasificacion": "PG-13"
+        }
+        response_pelicula = client.post("/api/peliculas/", json=pelicula_data)
+        assert response_pelicula.status_code == 201
+        pelicula_id = response_pelicula.json()["id"]
         # 
-        # # 3. Marcar como favorito
-        # response_favorito = client.post(
-        #     f"/api/usuarios/{usuario_id}/favoritos/{pelicula_id}"
-        # )
-        # assert response_favorito.status_code == 201
+        # 3. Marcar como favorito
+        response_favorito = client.post(
+            f"/api/usuarios/{usuario_id}/favoritos/{pelicula_id}"
+        )
+        assert response_favorito.status_code == 201
         # 
-        # # 4. Verificar que aparece en favoritos del usuario
-        # response_lista = client.get(f"/api/usuarios/{usuario_id}/favoritos")
-        # assert response_lista.status_code == 200
-        # favoritos = response_lista.json()
-        # assert len(favoritos) == 1
-        # assert favoritos[0]["id"] == pelicula_id
+        # 4. Verificar que aparece en favoritos del usuario
+        response_lista = client.get(f"/api/usuarios/{usuario_id}/favoritos")
+        assert response_lista.status_code == 200
+        favoritos = response_lista.json()
+        assert len(favoritos) == 1
+        assert favoritos[0]["id"] == pelicula_id
         pass
 
 
