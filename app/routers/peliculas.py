@@ -54,8 +54,15 @@ def crear_pelicula(
     - **clasificacion**: Clasificación por edad (G, PG, PG-13, R, etc.)
     - **sinopsis**: Breve descripción de la trama
     """
+    db_pelicula = Pelicula(**pelicula.model_dump())
+    session.add(db_pelicula)
+    session.commit()
+    session.refresh(db_pelicula)
     # TODO: Verificar que no exista una película con el mismo título y año
-    statement = 
+    statement =  select(Pelicula).where(
+    Pelicula.titulo == pelicula.titulo,
+    Pelicula.año == pelicula.año
+    )
     
     existing_pelicula = 
     if existing_pelicula:
