@@ -68,7 +68,9 @@ def crear_usuario(
     
     # TODO: Crear el nuevo usuario
     db_usuario = Usuario.model_validate(usuario)
-    
+    session.add(db_usuario)
+    session.commit()
+    session.refresh(db_usuario)
     return db_usuario
 
 
@@ -114,9 +116,9 @@ def actualizar_usuario(
     
     # TODO: Si se actualiza el correo, verificar que no exista
         if usuario_update.correo:
-        correo_existente = session.query(Usuario).filter(
-            Usuario.correo == usuario_update.correo,
-            Usuario.id != usuario_id
+            correo_existente = session.query(Usuario).filter(
+                Usuario.correo == usuario_update.correo,
+                Usuario.id != usuario_id
         ).first()
         if correo_existente:
             raise HTTPException(status_code=400, detail="Correo ya registrado por otro usuario")
@@ -166,10 +168,10 @@ def listar_favoritos_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Verificar que el usuario existe
-    usuario = 
+    usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
     
     # TODO: Obtener las películas favoritas del usuario
-    statement = 
+    statement = session.query(Pelicula).join(Favorito).filter(Favorito.usuario_id == usuario_id)
     
     return peliculas
 
