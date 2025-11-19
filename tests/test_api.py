@@ -319,15 +319,15 @@ class TestFavoritos:
         pelicula_test: Pelicula
     ):
         """Test para DELETE /api/favoritos/{id}"""
-        # # Crear favorito
-        # favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
-        # session.add(favorito)
-        # session.commit()
-        # session.refresh(favorito)
+        # Crear favorito
+        favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
+        session.add(favorito)
+        session.commit()
+        session.refresh(favorito)
         # 
-        # # Eliminar favorito
-        # response = client.delete(f"/api/favoritos/{favorito.id}")
-        # assert response.status_code == 204
+        # Eliminar favorito
+        response = client.delete(f"/api/favoritos/{favorito.id}")
+        assert response.status_code == 204
         pass
     
     # TODO: Test para marcar favorito desde usuario
