@@ -114,16 +114,16 @@ class TestUsuarios:
     # TODO: Test para crear usuario
     def test_crear_usuario(self, client: TestClient):
         """Test para POST /api/usuarios"""
-        # usuario_data = {
-        #     "nombre": "Nuevo Usuario",
-        #     "correo": "nuevo@example.com"
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 201
-        # data = response.json()
-        # assert data["nombre"] == usuario_data["nombre"]
-        # assert data["correo"] == usuario_data["correo"]
-        # assert "id" in data
+        usuario_data = {
+            "nombre": "Nuevo Usuario",
+            "correo": "nuevo@example.com"
+        }
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 201
+        data = response.json()
+        assert data["nombre"] == usuario_data["nombre"]
+        assert data["correo"] == usuario_data["correo"]
+        assert "id" in data
         pass
     
     # TODO: Test para crear usuario con correo duplicado
