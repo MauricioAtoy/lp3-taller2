@@ -33,9 +33,9 @@ class Settings(BaseSettings):
     
     # TODO: Configuración del servidor :)
     if __name__ == "__main__":
-    host: str = "0.0.0.0"
-    port: int = 8000
-    debug: bool = True
+        host: str = "0.0.0.0"
+        port: int = 8000
+        debug: bool = True
     
     # TODO: Configuración de CORS :)
     # En desarrollo puedes usar ["*"], en producción especifica los orígenes permitidos
@@ -144,7 +144,7 @@ class ProductionSettings(Settings):
     cors_origins: list[str] = ["https://miappfrontend.com"]
     log_level: str = "INFO"
     # TODO: Cambiar a una base de datos más robusta (PostgreSQL, MySQL)
-        database_url: str = "postgresql://usuario:usuario@localhost/peliculas_prod"
+    database_url: str = "postgresql://usuario:usuario@localhost/peliculas_prod"
     # database_url: str = "postgresql://user:password@localhost/peliculas_prod"
 
 
