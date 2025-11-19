@@ -449,9 +449,9 @@ class TestValidacion:
     # TODO: Test para validar campos requeridos
     def test_campos_requeridos(self, client: TestClient):
         """Test para verificar que los campos requeridos son obligatorios"""
-        # usuario_data = {"nombre": "Usuario Sin Email"}
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 422
+        usuario_data = {"nombre": "Usuario Sin Email"}
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 422
         pass
 
 
