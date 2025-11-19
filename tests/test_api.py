@@ -158,22 +158,22 @@ class TestUsuarios:
     # TODO: Test para actualizar usuario
     def test_actualizar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para PUT /api/usuarios/{id}"""
-        # update_data = {"nombre": "Nombre Actualizado"}
-        # response = client.put(f"/api/usuarios/{usuario_test.id}", json=update_data)
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["nombre"] == update_data["nombre"]
+        update_data = {"nombre": "Nombre Actualizado"}
+        response = client.put(f"/api/usuarios/{usuario_test.id}", json=update_data)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["nombre"] == update_data["nombre"]
         pass
     
     # TODO: Test para eliminar usuario
     def test_eliminar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para DELETE /api/usuarios/{id}"""
-        # response = client.delete(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 204
+        response = client.delete(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 204
         # 
-        # # Verificar que el usuario ya no existe
-        # response = client.get(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 404
+        # Verificar que el usuario ya no existe
+        response = client.get(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 404
         pass
 
 
