@@ -338,10 +338,10 @@ class TestFavoritos:
         pelicula_test: Pelicula
     ):
         """Test para POST /api/usuarios/{id}/favoritos/{id_pelicula}"""
-        # response = client.post(
-        #     f"/api/usuarios/{usuario_test.id}/favoritos/{pelicula_test.id}"
-        # )
-        # assert response.status_code == 201
+        response = client.post(
+            f"/api/usuarios/{usuario_test.id}/favoritos/{pelicula_test.id}"
+        )
+        assert response.status_code == 201
         pass
     
     # TODO: Test para listar favoritos de usuario
