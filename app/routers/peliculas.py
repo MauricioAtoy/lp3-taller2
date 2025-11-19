@@ -113,11 +113,20 @@ def actualizar_pelicula(
     - Los campos son opcionales, solo se actualizan los proporcionados
     """
     # TODO: Buscar la película
-    db_pelicula = 
-
-
+    db_pelicula =  session.get(Pelicula, pelicula_id)
+    if not db_pelicula:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Película con id {pelicula_id} no encontrada"
+        )
     # TODO: Actualizar solo los campos proporcionados
-    pelicula_data = 
+    pelicula_data = pelicula_update.model_dump(exclude_unset=True)
+    for key, value in pelicula_data.items():
+        setattr(db_pelicula, key, value)
+
+    session.add(db_pelicula)
+    session.commit()
+    session.refresh(db_pelicula) 
 
     return db_pelicula
 
