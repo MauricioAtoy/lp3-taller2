@@ -7,7 +7,7 @@ from app.routers import usuarios, peliculas, favoritos
 
 # TODO: Importar la configuración desde app.config
 
-
+from app.config import settings
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
