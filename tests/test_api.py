@@ -25,18 +25,18 @@ def session_fixture():
     Se limpia automáticamente después de cada test.
     """
     # TODO: Crear engine en memoria (SQLite)
-    # engine = create_engine(
-    #     "sqlite:///:memory:",
-    #     connect_args={"check_same_thread": False},
-    #     poolclass=StaticPool,
-    # )
+    engine = create_engine(
+        "sqlite:///:memory:",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
     
     # TODO: Crear todas las tablas
-    # SQLModel.metadata.create_all(engine)
+    SQLModel.metadata.create_all(engine)
     
     # TODO: Crear sesión
-    # with Session(engine) as session:
-    #     yield session
+    with Session(engine) as session:
+        yield session
     pass
 
 
