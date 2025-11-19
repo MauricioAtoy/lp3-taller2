@@ -47,13 +47,13 @@ def client_fixture(session: Session):
     Crea un cliente de pruebas de FastAPI con la sesión de test.
     """
     # TODO: Override de la dependencia get_session
-    # def get_session_override():
-    #     return session
+    def get_session_override():
+        return session
     
-    # app.dependency_overrides[get_session] = get_session_override
-    # client = TestClient(app)
-    # yield client
-    # app.dependency_overrides.clear()
+    app.dependency_overrides[get_session] = get_session_override
+    client = TestClient(app)
+    yield client
+    app.dependency_overrides.clear()
     pass
 
 
@@ -63,14 +63,14 @@ def usuario_test_fixture(session: Session):
     """
     Crea un usuario de prueba en la base de datos.
     """
-    # usuario = Usuario(
-    #     nombre="Usuario Test",
-    #     correo="test@example.com"
-    # )
-    # session.add(usuario)
-    # session.commit()
-    # session.refresh(usuario)
-    # return usuario
+    usuario = Usuario(
+        nombre="Usuario Test",
+        correo="test@example.com"
+    )
+    session.add(usuario)
+    session.commit()
+    session.refresh(usuario)
+    return usuario
     pass
 
 
