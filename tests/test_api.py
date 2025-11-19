@@ -251,8 +251,8 @@ class TestPeliculas:
     # TODO: Test para buscar películas con múltiples filtros
     def test_buscar_peliculas_multiples_filtros(self, client: TestClient):
         """Test para búsqueda con múltiples parámetros"""
-        # response = client.get("/api/peliculas/buscar/?genero=Drama&año_min=2020")
-        # assert response.status_code == 200
+        response = client.get("/api/peliculas/buscar/?genero=Drama&año_min=2020")
+        assert response.status_code == 200
         pass
 
 
