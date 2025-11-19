@@ -211,20 +211,20 @@ def verificar_favorito(
     Retorna un objeto con el estado y el ID del favorito si existe.
     """
     # TODO: Buscar el favorito
-    # statement = select(Favorito).where(
-    #     Favorito.id_usuario == usuario_id,
-    #     Favorito.id_pelicula == pelicula_id
-    # )
-    # favorito = session.exec(statement).first()
+    statement = select(Favorito).where(
+        Favorito.id_usuario == usuario_id,
+        Favorito.id_pelicula == pelicula_id
+    )
+    favorito = session.exec(statement).first()
     
-    # if favorito:
-    #     return {
-    #         "es_favorito": True,
-    #         "favorito_id": favorito.id,
-    #         "fecha_marcado": favorito.fecha_marcado
-    #     }
-    # else:
-    #     return {"es_favorito": False}
+    if favorito:
+        return {
+            "es_favorito": True,
+            "favorito_id": favorito.id,
+            "fecha_marcado": favorito.fecha_marcado
+        }
+    else:
+        return {"es_favorito": False}
     pass
 
 
