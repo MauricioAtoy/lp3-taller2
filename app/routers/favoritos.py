@@ -129,17 +129,17 @@ def eliminar_favorito(
     - **favorito_id**: ID del favorito a eliminar
     """
     # TODO: Buscar el favorito
-    # favorito = session.get(Favorito, favorito_id)
-    # if not favorito:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Favorito con id {favorito_id} no encontrado"
-    #     )
+    favorito = session.get(Favorito, favorito_id)
+    if not favorito:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Favorito con id {favorito_id} no encontrado"
+        )
     
     # TODO: Eliminar el favorito
-    # session.delete(favorito)
-    # session.commit()
-    # return None
+    session.delete(favorito)
+    session.commit()
+    return None
     pass
 
 
