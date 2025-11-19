@@ -102,12 +102,12 @@ def obtener_favorito(
     - **favorito_id**: ID del favorito
     """
     # TODO: Buscar el favorito por ID
-    # favorito = session.get(Favorito, favorito_id)
-    # if not favorito:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Favorito con id {favorito_id} no encontrado"
-    #     )
+    favorito = session.get(Favorito, favorito_id)
+    if not favorito:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Favorito con id {favorito_id} no encontrado"
+        )
     
     # TODO: Cargar relaciones (usuario y película)
     # Esto depende de cómo hayas configurado las relaciones en los modelos
