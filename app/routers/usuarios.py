@@ -221,7 +221,10 @@ def marcar_favorito(
         )
     
     # TODO: Crear el favorito
-    favorito = 
+    favorito =  Favorito(
+        id_usuario=usuario_id,
+        id_pelicula=pelicula_id
+    )
     
     return {"message": "Película marcada como favorita exitosamente"}
 
@@ -243,9 +246,12 @@ def eliminar_favorito(
     - **pelicula_id**: ID de la película
     """
     # TODO: Buscar el favorito
-    statement = 
+    statement = select(Favorito).where(
+        Favorito.id_usuario == usuario_id,
+        Favorito.id_pelicula == pelicula_id
+    )
 
-    favorito = 
+    favorito = session.exec(statement).first()
     
     if not favorito:
         raise HTTPException(
@@ -254,7 +260,8 @@ def eliminar_favorito(
         )
     
     # TODO: Eliminar el favorito
-    
+    session.delete(favorito)
+    session.commit()
     return None
 
 
@@ -270,6 +277,12 @@ def obtener_estadisticas_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Verificar que el usuario existe
+    usuario = session.get(Usuario, usuario_id)
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
     # TODO: Calcular número total de favoritos
     # TODO: Obtener géneros más favoritos
     # TODO: Calcular tiempo total de películas favoritas
