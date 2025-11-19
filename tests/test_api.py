@@ -106,9 +106,9 @@ class TestUsuarios:
     # TODO: Test para listar usuarios
     def test_listar_usuarios(self, client: TestClient):
         """Test para GET /api/usuarios"""
-        # response = client.get("/api/usuarios/")
-        # assert response.status_code == 200
-        # assert isinstance(response.json(), list)
+        response = client.get("/api/usuarios/")
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
         pass
     
     # TODO: Test para crear usuario
