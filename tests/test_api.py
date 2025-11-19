@@ -151,8 +151,8 @@ class TestUsuarios:
     # TODO: Test para obtener usuario inexistente
     def test_obtener_usuario_no_existe(self, client: TestClient):
         """Test para verificar error 404 con usuario inexistente"""
-        # response = client.get("/api/usuarios/9999")
-        # assert response.status_code == 404
+        response = client.get("/api/usuarios/9999")
+        assert response.status_code == 404
         pass
     
     # TODO: Test para actualizar usuario
