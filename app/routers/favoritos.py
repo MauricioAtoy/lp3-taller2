@@ -181,17 +181,17 @@ def favoritos_por_pelicula(
     - **pelicula_id**: ID de la película
     """
     # TODO: Verificar que la película existe
-    # pelicula = session.get(Pelicula, pelicula_id)
-    # if not pelicula:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Película con id {pelicula_id} no encontrada"
-    #     )
+    pelicula = session.get(Pelicula, pelicula_id)
+    if not pelicula:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Película con id {pelicula_id} no encontrada"
+        )
     
     # TODO: Obtener todos los favoritos de la película
-    # statement = select(Favorito).where(Favorito.id_pelicula == pelicula_id)
-    # favoritos = session.exec(statement).all()
-    # return favoritos
+    statement = select(Favorito).where(Favorito.id_pelicula == pelicula_id)
+    favoritos = session.exec(statement).all()
+    return favoritos
     pass
 
 
