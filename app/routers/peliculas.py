@@ -4,7 +4,7 @@ Endpoints para gestionar películas en la plataforma.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlmodel import Session, select, or_, col
+from sqlmodel import Session, select, or_, col, desc
 from typing import List, Optional
 
 from app.database import get_session
@@ -221,9 +221,14 @@ def peliculas_populares(
     """
     # TODO: Consultar películas ordenadas por número de favoritos
     from sqlalchemy import func
-    statement = 
-
-    results = 
+    statement =  (
+        session.query(Pelicula, func.count(Favorito.id).label("total_favs"))
+        .outerjoin(Favorito, Favorito.pelicula_id == Pelicula.id)
+        .group_by(Pelicula.id)
+        .order_by(func.count(Favorito.id).desc())
+        .limit(limit)
+    )
+    results = statement.all()
     peliculas = [ result[0] for result in results ]
     return peliculas
 
@@ -245,14 +250,16 @@ def peliculas_por_clasificacion(
     if clasificacion.upper() not in clasificaciones_validas:
         raise HTTPException(
             # TODO: código y detalle del error
-
+            status_code=400,
+            detail=f"Clasificación inválida: '{clasificacion}'. "
+                   f"Las permitidas son: {', '.join(clasificaciones_validas)}"
         )
     
     # TODO: Buscar películas por clasificación
-    # statement = select(Pelicula).where(
-    #     Pelicula.clasificacion == clasificacion.upper()
-    # ).limit(limit)
-    # peliculas = session.exec(statement).all()
+    statement = select(Pelicula).where(
+        Pelicula.clasificacion == clasificacion.upper()
+    ).limit(limit)
+    peliculas = session.exec(statement).all()
     return peliculas
 
 
@@ -268,6 +275,8 @@ def peliculas_recientes(
     - **limit**: Número de películas a retornar
     """
     # TODO: Consultar películas ordenadas por fecha de creación
+    statement = select(Pelicula).order_by(desc(Pelicula.created_at))
+    peliculas = session.exec(statement).all()
     # statement = select(Pelicula).order_by(Pelicula.fecha_creacion.desc()).limit(limit)
     # peliculas = session.exec(statement).all()
     # return peliculas
