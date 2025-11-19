@@ -82,11 +82,11 @@ def crear_favorito(
         )
     
     # TODO: Crear el nuevo favorito
-    # db_favorito = Favorito.model_validate(favorito)
-    # session.add(db_favorito)
-    # session.commit()
-    # session.refresh(db_favorito)
-    # return db_favorito
+    db_favorito = Favorito.model_validate(favorito)
+    session.add(db_favorito)
+    session.commit()
+    session.refresh(db_favorito)
+    return db_favorito
     pass
 
 
