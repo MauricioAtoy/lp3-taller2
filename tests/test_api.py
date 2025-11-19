@@ -129,13 +129,13 @@ class TestUsuarios:
     # TODO: Test para crear usuario con correo duplicado
     def test_crear_usuario_correo_duplicado(self, client: TestClient, usuario_test: Usuario):
         """Test para verificar que no se permiten correos duplicados"""
-        # usuario_data = {
-        #     "nombre": "Otro Usuario",
-        #     "correo": usuario_test.correo
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 400
-        # assert "correo" in response.json()["detail"].lower()
+        usuario_data = {
+            "nombre": "Otro Usuario",
+            "correo": usuario_test.correo
+        }
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 400
+        assert "correo" in response.json()["detail"].lower()
         pass
     
     # TODO: Test para obtener usuario por ID
