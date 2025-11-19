@@ -68,6 +68,17 @@ async def root():
     """
     return {
         # TODO: Agregar información 
+        "api_name": "Mi API de Películas",
+        "version": "1.0.0",
+        "description": "API para gestionar usuarios, películas y favoritos.",
+        "endpoints": {
+            "usuarios": "/api/usuarios",
+            "peliculas": "/api/peliculas",
+            "favoritos": "/api/favoritos"
+        },
+        "docs": "/docs",
+        "redoc": "/redoc",
+        "note": "Para más información, revisa la documentación en los enlaces proporcionados."
     }
 
 
