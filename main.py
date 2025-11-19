@@ -46,8 +46,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # TODO: En producción, especificar orígenes permitidos
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos permitidos
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 
