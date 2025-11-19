@@ -434,16 +434,16 @@ class TestValidacion:
     # TODO: Test para validar año de película
     def test_año_pelicula_invalido(self, client: TestClient):
         """Test para verificar validación de año"""
-        # pelicula_data = {
-        #     "titulo": "Película Test",
-        #     "director": "Director Test",
-        #     "genero": "Drama",
-        #     "duracion": 120,
-        #     "año": 1800,  # Año inválido (cine comenzó en 1888)
-        #     "clasificacion": "PG-13"
-        # }
-        # response = client.post("/api/peliculas/", json=pelicula_data)
-        # assert response.status_code == 422
+        pelicula_data = {
+            "titulo": "Película Test",
+            "director": "Director Test",
+            "genero": "Drama",
+            "duracion": 120,
+            "año": 1800,  # Año inválido (cine comenzó en 1888)
+            "clasificacion": "PG-13"
+        }
+        response = client.post("/api/peliculas/", json=pelicula_data)
+        assert response.status_code == 422
         pass
     
     # TODO: Test para validar campos requeridos
