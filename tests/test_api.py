@@ -195,20 +195,20 @@ class TestPeliculas:
     # TODO: Test para crear película
     def test_crear_pelicula(self, client: TestClient):
         """Test para POST /api/peliculas"""
-        # pelicula_data = {
-        #     "titulo": "Nueva Película",
-        #     "director": "Director Nuevo",
-        #     "genero": "Acción",
-        #     "duracion": 150,
-        #     "año": 2023,
-        #     "clasificacion": "PG-13",
-        #     "sinopsis": "Una nueva película de prueba"
-        # }
-        # response = client.post("/api/peliculas/", json=pelicula_data)
-        # assert response.status_code == 201
-        # data = response.json()
-        # assert data["titulo"] == pelicula_data["titulo"]
-        # assert "id" in data
+        pelicula_data = {
+            "titulo": "Nueva Película",
+            "director": "Director Nuevo",
+            "genero": "Acción",
+            "duracion": 150,
+            "año": 2023,
+            "clasificacion": "PG-13",
+            "sinopsis": "Una nueva película de prueba"
+        }
+        response = client.post("/api/peliculas/", json=pelicula_data)
+        assert response.status_code == 201
+        data = response.json()
+        assert data["titulo"] == pelicula_data["titulo"]
+        assert "id" in data
         pass
     
     # TODO: Test para obtener película por ID
