@@ -89,10 +89,27 @@ async def health_check():
     Health check endpoint para verificar el estado de la API.
     Útil para sistemas de monitoreo y orquestación.
     """
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+
+        # TODO: Agregar información sobre el sistema (uptime, memoria, etc.)
+        uptime_seconds = int(time.time() - APP_START_TIME)
+
+    system_info = {
+        "uptime_seconds": uptime_seconds,
+        "cpu_usage_percent": psutil.cpu_percent(),
+        "memory_usage_percent": psutil.virtual_memory().percent,
+    }
     return {
         "status": "healthy",
         # TODO: Agregar verificación de conexión a base de datos
-        # TODO: Agregar información sobre el sistema (uptime, memoria, etc.)
+        "status": "healthy" if db_status == "connected" else "degraded",
+        "database": db_status,
+        "system": system_info,
     }
 
 
