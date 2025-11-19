@@ -80,19 +80,19 @@ def pelicula_test_fixture(session: Session):
     """
     Crea una película de prueba en la base de datos.
     """
-    # pelicula = Pelicula(
-    #     titulo="Película Test",
-    #     director="Director Test",
-    #     genero="Drama",
-    #     duracion=120,
-    #     año=2020,
-    #     clasificacion="PG-13",
-    #     sinopsis="Una película de prueba"
-    # )
-    # session.add(pelicula)
-    # session.commit()
-    # session.refresh(pelicula)
-    # return pelicula
+    pelicula = Pelicula(
+        titulo="Película Test",
+        director="Director Test",
+        genero="Drama",
+        duracion=120,
+        año=2020,
+        clasificacion="PG-13",
+        sinopsis="Una película de prueba"
+    )
+    session.add(pelicula)
+    session.commit()
+    session.refresh(pelicula)
+    return pelicula
     pass
 
 
