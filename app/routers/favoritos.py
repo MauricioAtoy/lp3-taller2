@@ -155,17 +155,17 @@ def favoritos_por_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Verificar que el usuario existe
-    # usuario = session.get(Usuario, usuario_id)
-    # if not usuario:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Usuario con id {usuario_id} no encontrado"
-    #     )
+    usuario = session.get(Usuario, usuario_id)
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
     
     # TODO: Obtener todos los favoritos del usuario
-    # statement = select(Favorito).where(Favorito.id_usuario == usuario_id)
-    # favoritos = session.exec(statement).all()
-    # return favoritos
+    statement = select(Favorito).where(Favorito.id_usuario == usuario_id)
+    favoritos = session.exec(statement).all()
+    return favoritos
     pass
 
 
