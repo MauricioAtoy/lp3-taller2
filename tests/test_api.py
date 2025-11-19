@@ -353,16 +353,16 @@ class TestFavoritos:
         pelicula_test: Pelicula
     ):
         """Test para GET /api/usuarios/{id}/favoritos"""
-        # # Crear favorito
-        # favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
-        # session.add(favorito)
-        # session.commit()
+        # Crear favorito
+        favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
+        session.add(favorito)
+        session.commit()
         # 
-        # # Listar favoritos del usuario
-        # response = client.get(f"/api/usuarios/{usuario_test.id}/favoritos")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert len(data) > 0
+        # Listar favoritos del usuario
+        response = client.get(f"/api/usuarios/{usuario_test.id}/favoritos")
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data) > 0
         pass
 
 
