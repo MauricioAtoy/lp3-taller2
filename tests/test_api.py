@@ -141,11 +141,11 @@ class TestUsuarios:
     # TODO: Test para obtener usuario por ID
     def test_obtener_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para GET /api/usuarios/{id}"""
-        # response = client.get(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["id"] == usuario_test.id
-        # assert data["nombre"] == usuario_test.nombre
+        response = client.get(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["id"] == usuario_test.id
+        assert data["nombre"] == usuario_test.nombre
         pass
     
     # TODO: Test para obtener usuario inexistente
