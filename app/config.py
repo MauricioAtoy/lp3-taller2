@@ -46,7 +46,8 @@ class Settings(BaseSettings):
     supports_credentials=True,  # Permitir cookies o headers de autenticación
     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos HTTP permitidos
     allow_headers=["*"]         # Encabezados permitidos
-)
+    )
+    
     # TODO: Configuración de seguridad (para futuras mejoras)
     secret_key: str = "your-secret-key-here"  # Cambiar en producción
     algorithm: str = "HS256"
