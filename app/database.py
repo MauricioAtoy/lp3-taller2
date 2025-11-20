@@ -67,7 +67,7 @@ def check_database_connection() -> bool:
     try:
         with Session(engine) as session:
             # TODO: Ejecutar una consulta simple para verificar la conexión
-            # session.exec(text("SELECT 1"))
+            session.exec(text("SELECT 1"))
             return True
     except Exception as e:
         print(f"Error al conectar con la base de datos: {e}")

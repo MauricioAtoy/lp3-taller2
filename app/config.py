@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     # Para SQLite: sqlite:///./peliculas.db
     # Para PostgreSQL: postgresql://user:password@localhost/dbname
     database_url: str = "sqlite:///./peliculas.db"
-    postgres= str = "postgresql://usuario:usuario@localhost/peliculas.db"
+    postgres: str = "postgresql://usuario:usuario@localhost/peliculas.db"
     
     # TODO: Configuración del servidor :)
     if __name__ == "__main__":
