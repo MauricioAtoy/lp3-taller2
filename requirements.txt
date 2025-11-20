@@ -16,3 +16,6 @@ python-dotenv
 pytest
 pytest-asyncio
 httpx
+
+# JSON Web Tokens
+PyJWT>=2.0.0
