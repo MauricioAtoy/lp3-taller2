@@ -4,7 +4,13 @@ Maneja diferentes entornos: desarrollo, pruebas y producción.
 """
 
 from pydantic_settings import BaseSettings
-from typing import Literal
+from typing import Literal, Optional, List
+from datetime import datetime, timedelta
+import logging
+
+# Seguridad / OAuth2
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
 
 
 class Settings(BaseSettings):
@@ -40,14 +46,13 @@ class Settings(BaseSettings):
     # TODO: Configuración de CORS :)
     # En desarrollo puedes usar ["*"], en producción especifica los orígenes permitidos
     cors_origins: list[str] = ["*"]
-    CORS(
-    app,
+    
     origins=cors_origins,       # Dominios permitidos
     supports_credentials=True,  # Permitir cookies o headers de autenticación
     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos HTTP permitidos
     allow_headers=["*"]         # Encabezados permitidos
-    )
     
+
     # TODO: Configuración de seguridad (para futuras mejoras)
     secret_key: str = "your-secret-key-here"  # Cambiar en producción
     algorithm: str = "HS256"
