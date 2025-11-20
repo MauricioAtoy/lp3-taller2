@@ -28,8 +28,8 @@ class Settings(BaseSettings):
     # TODO: Configuración del entorno :)
     # environment: Literal["development", "testing", "production"] = "development"
     environment: str = "development"
-    testing = str = "testing"
-    production = str = "production"
+    testing: str = "testing"
+    production: str = "production"
 
     # TODO: Configuración de la base de datos :)
     # Para SQLite: sqlite:///./peliculas.db
