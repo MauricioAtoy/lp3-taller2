@@ -31,7 +31,7 @@ app = FastAPI(
     lifespan=lifespan,
     # TODO: Agregar información de contacto y licencia
     contact={
-        "name": "Tu Nombre",
+        "name": "Api Javier",
         "email": "tu.email@example.com",
     },
     license_info={
@@ -42,12 +42,27 @@ app = FastAPI(
 
 # TODO: Configurar CORS para permitir solicitudes desde diferentes orígenes
 # Esto es importante para desarrollo con frontend separado
+# Configuración de CORS: tomamos orígenes desde `settings` si están definidos,
+# soportamos una lista o un solo origen en string. Si se usa "*" y se permiten
+# credenciales, eso no es compatible con el estándar CORS de navegadores, así
+# que desactivamos allow_credentials en ese caso.
+cors_origins = getattr(settings, "cors_origins", ["http://localhost:3000"])
+if isinstance(cors_origins, str):
+    cors_origins = [cors_origins]
+
+# allow_credentials por defecto (puede ser override en settings)
+allow_credentials = getattr(settings, "allow_credentials", True)
+# Si el origen es un wildcard "*" no es seguro/usual permitir credentials
+if "*" in cors_origins and allow_credentials:
+    # Evitar enviar True junto con '*' (los navegadores lo bloquearán)
+    allow_credentials = False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: En producción, especificar orígenes permitidos
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos permitidos
-    allow_headers=["Authorization", "Content-Type"],
+    allow_origins=cors_origins,
+    allow_credentials=allow_credentials,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
 )
 
 
