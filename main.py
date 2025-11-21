@@ -81,10 +81,19 @@ async def root():
     Endpoint raíz de la API.
     Retorna información básica y enlaces a la documentación.
     """
+    routes = {}
+    for route in app.routes:
+        if hasattr(route,"path") and hasattr(route, "methods"):
+            routes[route.name]={
+                "path":route.path,
+                "methods":list(route.methods)
+            }
     return {
+
         # TODO: Agregar información 
-        "api_name": "Mi API de Películas",
-        "version": "1.0.0",
+        "api_name": app.title,
+        "version": app.version,
+        "routes": routes,
         "description": "API para gestionar usuarios, películas y favoritos.",
         "endpoints": {
             "usuarios": "/api/usuarios",
