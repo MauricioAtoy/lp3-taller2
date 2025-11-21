@@ -3,7 +3,7 @@ Modelos de datos usando SQLModel.
 Define la estructura de las tablas de la base de datos.
 SQLModel combina SQLAlchemy con Pydantic para validación automática.
 """
-
+from sqlalchemy import UniqueConstraint
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import datetime

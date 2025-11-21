@@ -4,12 +4,10 @@ Maneja diferentes entornos: desarrollo, pruebas y producción.
 """
 
 from pydantic_settings import BaseSettings
-from typing import Literal, Optional, List
+from typing import (Literal, Optional, List, ClassVar)
 from datetime import datetime, timedelta
 import logging
-
-# Seguridad / OAuth2
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from sqlalchemy import UniqueConstraint
 import jwt
 
 
@@ -23,7 +21,7 @@ class Settings(BaseSettings):
 
     app_name: str = "API de Películas"
     app_version: str = "1.0.0"
-    
+    debug: bool = True
 
     # TODO: Configuración del entorno :)
     # environment: Literal["development", "testing", "production"] = "development"
@@ -45,40 +43,15 @@ class Settings(BaseSettings):
     
     # TODO: Configuración de CORS :)
     # En desarrollo puedes usar ["*"], en producción especifica los orígenes permitidos
-    cors_origins: list[str] = ["*"]
-    
-    origins=cors_origins,       # Dominios permitidos
-    supports_credentials=True,  # Permitir cookies o headers de autenticación
-    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Métodos HTTP permitidos
-    allow_headers=["*"]         # Encabezados permitidos
-    
+    cors_origins: list[str] = ["*"]  
 
     # TODO: Configuración de seguridad (para futuras mejoras)
     secret_key: str = "your-secret-key-here"  # Cambiar en producción
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
-    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-    def crear_token(data: dict, expires_delta: Optional[timedelta] = None):
-        to_encode = data.copy()
-        expire = datetime.utcnow() + (timedelta(minutes=access_token_expire_minutes))
-        to_encode.update({"exp": expire})
-        encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
-        return encoded_jwt
-@app.post("/token")
-def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    if form_data.username != "admin" or form_data.password != "123":
-        raise HTTPException(status_code=400, detail="Credenciales incorrectas")
-
-    access_token = crear_token({"sub": form_data.username})
-    return {"access_token": access_token, "token_type": "bearer"}
-    
     # TODO: Configuración de logging :)
     log_level: str = "INFO"
-    logging.basicConfig(
-    level=getattr(logging, log_level),  # convierte "INFO" en logging.INFO
-    format="%(asctime)s - %(levelname)s - %(message)s"
-    )
 
     class Config:
         """
@@ -98,21 +71,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 # TODO: Crear una instancia global de Settings
 settings = Settings()
-class Settings(BaseSettings):
-    host: str = "0.0.0.0"
-    port: int = 8000
-    debug: bool = True
-
-    # CORS
-    cors_origins: List[str] = ["*"]
-
-    # Seguridad (JWT)
-    secret_key: str = "super-secret-key"
-    algorithm: str = "HS256"
-    access_token_expire_minutes: int = 30
-
-    # Logging
-    log_level: str = "INFO"
 
 # TODO: Opcional - Crear diferentes configuraciones para cada entorno
 class DevelopmentSettings(Settings):
