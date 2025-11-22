@@ -5,6 +5,8 @@ Utiliza SQLModel para ORM y gestión de conexiones.
 
 from sqlmodel import SQLModel, create_engine, Session
 from typing import Generator
+from sqlalchemy import text
+
 
 from app.config import settings
 

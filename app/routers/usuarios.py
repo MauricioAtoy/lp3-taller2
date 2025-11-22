@@ -3,7 +3,7 @@ Router de Usuarios.
 Endpoints para gestionar usuarios en la plataforma.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlmodel import Session, select
 from typing import List
 
@@ -17,6 +17,7 @@ from app.schemas import (
     PeliculaRead
 )
 
+
 # TODO: Crear el router con prefijo y tags
 router = APIRouter(tags=["usuarios"])
 
@@ -26,7 +27,8 @@ router = APIRouter(tags=["usuarios"])
 @router.get("/", response_model=List[UsuarioRead])
 def listar_usuarios(
     session: Session = Depends(get_session),
-    skip: int = 0,
+    page: int = Query(1, ge=1, description="Número de página"),
+    size: int = Query(10, ge=1, le=100, description="Número de usuarios por página"),
     limit: int = 100
 ):
     """
@@ -35,20 +37,18 @@ def listar_usuarios(
     - **skip**: Número de registros a omitir (para paginación)
     - **limit**: Número máximo de registros a retornar
     """
+    skip = (page - 1) * size,
     # TODO: Consultar todos los usuarios con paginación
-    statement = select(Usuario).offset(skip).limit(limit)
+    total = session.exec(select(Usuario)).count()
+    statement = select(Usuario).offset(skip).limit(size)
     usuarios = session.exec(statement).all()
-    total = db.query(Usuario).count()
-    pages = (total + size - 1) // size
-    return PaginatedResponse(
-        items=usuarios,
-        total=total,
-        page=page,
-        size=size,
-        pages=pages
-    )
-
-    return usuarios
+    return {
+        "items": usuarios,
+        "total": total,
+        "page": page,
+        "size": size,
+        "pages": (total + size - 1) // size
+    }
 
 
 # TODO: Endpoint para crear un nuevo usuario

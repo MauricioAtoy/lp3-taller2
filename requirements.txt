@@ -21,3 +21,4 @@ httpx
 PyJWT>=2.0.0
 #email validator
 pydantic[email]
+psutil

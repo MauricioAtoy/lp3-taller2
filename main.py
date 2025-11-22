@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-
+from sqlalchemy import text
+import psutil
+from app.database import engine
 from app.database import create_db_and_tables
 from app.routers import usuarios, peliculas, favoritos
 
