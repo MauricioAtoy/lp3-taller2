@@ -99,6 +99,24 @@ lp3-taller2
    - Documentación *Swagger UI*: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
    - Documentación *ReDoc*: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
+# frontend
+## # 1. Instalar Node 20
+curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install nodejs -y
+
+# 2. Instalar PNPM globalmente
+sudo npm install -g pnpm
+
+# 3. Verificar versiones
+node -v
+npm -v
+pnpm -v 
+# Instalar dependencias del proyecto Node
+pnpm install
+
+# Ejecutar en modo desarrollo
+pnpm dev
+
 ## Uso de la API
 
 ### Usuarios
