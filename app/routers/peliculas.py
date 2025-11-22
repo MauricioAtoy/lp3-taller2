@@ -12,10 +12,7 @@ from app.models import Pelicula, Favorito
 from app.schemas import PeliculaCreate, PeliculaRead, PeliculaUpdate
 
 # TODO: Crear el router con prefijo y tags
-router = APIRouter(
-    prefix="/api/peliculas",
-    tags=["Películas"]
-)
+router = APIRouter(tags=["Películas"])
 
 
 # TODO: Endpoint para listar todas las películas

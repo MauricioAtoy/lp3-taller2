@@ -16,10 +16,8 @@ from app.schemas import (
 )
 
 # TODO: Crear el router con prefijo y tags
-router = APIRouter(
-    prefix="/api/favoritos",
-    tags=["Favoritos"]
-)
+router = APIRouter(tags=["favoritos"])
+
 
 
 # TODO: Endpoint para listar todos los favoritos

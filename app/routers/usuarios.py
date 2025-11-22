@@ -18,10 +18,8 @@ from app.schemas import (
 )
 
 # TODO: Crear el router con prefijo y tags
-router = APIRouter(
-    prefix="/api/usuarios",
-    tags=["Usuarios"]
-)
+router = APIRouter(tags=["usuarios"])
+
 
 
 # TODO: Endpoint para listar todos los usuarios
@@ -38,6 +36,8 @@ def listar_usuarios(
     - **limit**: Número máximo de registros a retornar
     """
     # TODO: Consultar todos los usuarios con paginación
+    statement = select(Usuario).offset(skip).limit(limit)
+    usuarios = session.exec(statement).all()
     total = db.query(Usuario).count()
     pages = (total + size - 1) // size
     return PaginatedResponse(
@@ -47,6 +47,7 @@ def listar_usuarios(
         size=size,
         pages=pages
     )
+
     return usuarios
 
 
@@ -64,10 +65,10 @@ def crear_usuario(
     """
     # TODO: Verificar que el correo no exista
     statement = select(Usuario).where(Usuario.correo == usuario.correo)
-    existing_user = session.execute(statement).scalar_one_or_none()
+    existing_user = session.exec(statement).first()
     
     # TODO: Crear el nuevo usuario
-    db_usuario = Usuario.model_validate(usuario)
+    db_usuario = Usuario(**usuario.model_dump())
     session.add(db_usuario)
     session.commit()
     session.refresh(db_usuario)
@@ -86,7 +87,7 @@ def obtener_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Buscar el usuario por ID
-    usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
+    usuario = session.get(Usuario, usuario_id)
     
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
@@ -109,24 +110,30 @@ def actualizar_usuario(
     - **correo**: Nuevo correo (opcional)
     """
     # TODO: Buscar el usuario
-    db_usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
-    if not db_usuario:
+    usuario = session.get(Usuario, usuario_id)
+    if not usuario:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
 
     
     # TODO: Si se actualiza el correo, verificar que no exista
-        if usuario_update.correo:
-            correo_existente = session.query(Usuario).filter(
-                Usuario.correo == usuario_update.correo,
-                Usuario.id != usuario_id
-        ).first()
-        if correo_existente:
-            raise HTTPException(status_code=400, detail="Correo ya registrado por otro usuario")
+    if usuario_update.correo:
+        statement = select(Usuario).where(
+            Usuario.correo == usuario_update.correo,
+            Usuario.id != usuario_id
+    )
+    correo_existente = session.exec(statement).first()
+
+    if correo_existente:
+        raise HTTPException(status_code=400, detail="Correo ya registrado por otro usuario")
 
     # TODO: Actualizar solo los campos proporcionados
-    usuario_data =  usuario_update.dict(exclude_unset=True)
-    
-    return db_usuario
+    usuario_data =  usuario_update.model_dump(exclude_unset=True)
+    for key, value in data.items():
+        setattr(usuario, key, value)
+    session.add(usuario)
+    session.commit()
+    session.refresh(usuario)       
+    return usuario
 
 
 # TODO: Endpoint para eliminar un usuario
@@ -168,11 +175,15 @@ def listar_favoritos_usuario(
     - **usuario_id**: ID del usuario
     """
     # TODO: Verificar que el usuario existe
-    usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
-    
+    usuario = session.get(Usuario, usuario_id)
     # TODO: Obtener las películas favoritas del usuario
-    statement = session.query(Pelicula).join(Favorito).filter(Favorito.usuario_id == usuario_id)
-    
+    statement = (
+        select(Pelicula)
+        .join(Favorito, Favorito.id_pelicula == Pelicula.id)
+        .where(Favorito.id_usuario == usuario_id)
+    )
+    peliculas = session.exec(statement).all()
+
     return peliculas
 
 
@@ -225,6 +236,8 @@ def marcar_favorito(
         id_usuario=usuario_id,
         id_pelicula=pelicula_id
     )
+    session.add(favorito)
+    session.commit()
     
     return {"message": "Película marcada como favorita exitosamente"}
 
